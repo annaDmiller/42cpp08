@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <list>
 #include <exception>
+#include <deque>
 
 template <typename T>
 typename T::iterator easyfind(T& container, int num);

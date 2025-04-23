@@ -13,6 +13,11 @@ int main(void)
     l.push_back(15);
     l.push_back(25);
 
+    std::deque<int> d;
+    d.push_back(100);
+    d.push_back(200);
+    d.push_back(300);
+
     try
     {
         std::vector<int>::iterator it = easyfind(v, 30);
@@ -27,6 +32,16 @@ int main(void)
     {
         std::list<int>::iterator it = easyfind(l, 10);
         std::cout << "Found in list: " << *it << "\n";
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << e.what() << "\n";
+    }
+
+    try
+    {
+        std::deque<int>::iterator it = easyfind(d, 200);
+        std::cout << "Found in deque: " << *it << "\n";
     }
     catch (const std::exception& e)
     {
