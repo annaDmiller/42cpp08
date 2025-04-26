@@ -1,5 +1,4 @@
-#ifndef SPAN_HPP
-# define SPAN_HPP
+#pragma once
 
 #include <iostream>
 #include <algorithm>
@@ -49,5 +48,3 @@ class Span
 };
 
 #include "Span.tpp"
-
-#endif
