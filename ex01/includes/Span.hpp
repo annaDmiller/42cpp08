@@ -1,7 +1,9 @@
-#pragma once
+#ifndef SPAN_HPP
+# define SPAN_HPP
 
 #include <iostream>
 #include <algorithm>
+#include <functional>
 #include <exception>
 #include <vector>
 #include <limits>
@@ -20,12 +22,19 @@ class Span
         Span& operator=(const Span& other);
 
         void addNumber(int number);
-        unsigned int shortestSpan(void) const;
-        unsigned int longestSpan(void) const;
+        template <typename Iter> void addMultNumbers(Iter first, Iter last);        
+        unsigned int shortestSpan(void);
+        unsigned int longestSpan(void);
 
     class SpanIsFullException : public std::exception
     {
         virtual const char* what() const throw();
+    };
+
+    class NotEnoughPlaceScopeInsertException : public std::exception
+    {
+        virtual const char* what() const throw();
+
     };
 
     class SpanIsEmptyException : public std::exception
@@ -38,3 +47,7 @@ class Span
         virtual const char* what() const throw();
     };
 };
+
+#include "Span.tpp"
+
+#endif

@@ -31,20 +31,22 @@ Span& Span::operator=(const Span& other)
 
 void Span::addNumber(int number)
 {
-    if (this->_numbers.size() > this->_size)
+    if (this->_numbers.size() + 1 > this->_size)
         throw SpanIsFullException();
     this->_numbers.push_back(number);
     return ;
 }
 
-unsigned int Span::shortestSpan(void) const
+unsigned int Span::shortestSpan(void)
 {
     if (this->_numbers.size() == 0)
         throw SpanIsEmptyException();
     if (this->_numbers.size() == 1)
         throw SpanSmallForDistanceCalculationException();
     
-    unsigned int dist = __UINT32_MAX__;
+    std::sort(this->_numbers.begin(), this->_numbers.end());
+
+    unsigned int dist = *std::max_element(this->_numbers.begin(), this->_numbers.end());
     unsigned int temp = 0;
     for (unsigned int ind = 1; ind < static_cast<unsigned int>(this->_numbers.size()); ind++)
     {
@@ -55,27 +57,29 @@ unsigned int Span::shortestSpan(void) const
     return (dist);
 }
 
-unsigned int Span::longestSpan(void) const
+unsigned int Span::longestSpan(void)
 {
     if (this->_numbers.size() == 0)
         throw SpanIsEmptyException();
     if (this->_numbers.size() == 1)
         throw SpanSmallForDistanceCalculationException();
 
-    unsigned int dist = 0;
-    unsigned int temp = 0;
-    for (unsigned int ind = 1; ind < static_cast<unsigned int>(this->_numbers.size()); ind++)
-        {
-            temp = abs(this->_numbers[ind] - this->_numbers[ind - 1]);
-            if (dist < temp)
-                dist = temp;
-        }
-    return (dist);
+    std::sort(this->_numbers.begin(), this->_numbers.end());
+
+    int min = *std::min_element(this->_numbers.begin(), this->_numbers.end());
+    int max = *std::max_element(this->_numbers.begin(), this->_numbers.end());
+
+    return (max - min);
 }
 
 const char* Span::SpanIsFullException::what() const throw()
 {
     return ("Can't add number to the span - the Span is full");
+}
+
+const char* Span::NotEnoughPlaceScopeInsertException::what() const throw()
+{
+    return ("Can't insert a range of numbers - not enough space in the Span");  
 }
 
 const char* Span::SpanIsEmptyException::what() const throw()
