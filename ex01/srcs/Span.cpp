@@ -12,6 +12,10 @@ Span::Span(unsigned int N) : _size(N)
 
 Span::Span(const Span& other) : _size(other._size)
 {
+    for (std::vector<int>::const_iterator iter = other._numbers.begin(); iter != other._numbers.end(); iter++)
+    {
+        this->_numbers.push_back(*iter);
+    }
     return ;
 }
 
@@ -24,7 +28,13 @@ Span& Span::operator=(const Span& other)
 {
     if (this != &other)
     {
+        this->_size = other._size;
+        this->_numbers.clear();
 
+        for (std::vector<int>::const_iterator iter = other._numbers.begin(); iter != other._numbers.end(); iter++)
+        {
+            this->_numbers.push_back(*iter);
+        }
     }
     return (*this);
 }

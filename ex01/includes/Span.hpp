@@ -5,7 +5,9 @@
 #include <functional>
 #include <exception>
 #include <vector>
-#include <limits>
+#include <climits>
+#include <cstdlib>
+#include <ctime>
 
 class Span
 {

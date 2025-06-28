@@ -71,6 +71,17 @@ int main(void)
         std::cerr << e.what() << '\n';
     }
     
+    std::cout << std::endl;
+    std::cout << "GOING CRAZZZZZZZY" << std::endl;
+    Span big_test = Span(10000);
+    std::srand(std::time(0));
+
+    for (int ind = 0; ind < 10000; ind++)
+    {
+        big_test.addNumber(std::rand() % (400001) - 200000);
+    }
+    std::cout << "Shortest span - " << big_test.shortestSpan() << std::endl;
+    std::cout << "Longest span - " << big_test.longestSpan() << std::endl;
 
     return 0;
 }
